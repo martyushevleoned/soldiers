@@ -16,6 +16,8 @@ def send_text(m):
 
         for i in config.command:
             if config.registred_user[m.chat.id] == i[0]:
+                func.set_register(i[0], 'приказ', func.get_surname(i[0]) + ' -> ' + func.get_surname(i[1]) + ' ' + m.text)
+                func.set_register(i[1], 'приказ', func.get_surname(i[0]) + ' -> ' + func.get_surname(i[1]) + ' ' + m.text)
                 if i[1] in config.registred_user.values():
                     bot.send_message(func.get_key(i[1]), func.get_surname(i[0]) + ':\n' + m.text, reply_markup=None)
                     bot.send_message(m.chat.id, 'Приказ доведён до подчинённого', reply_markup=None)
@@ -97,3 +99,4 @@ def handler_call(call):
 
 
 bot.polling(none_stop=True)
+func.conn.close()

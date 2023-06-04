@@ -66,11 +66,7 @@ def get_personnel(sol_id, commander_id):
     # Первая логическая часть
     # Просто делаем запрос чтоб правильно назвать кем является пользователь
     cursor = conn.cursor()
-    cursor.execute(
-        f'select * from Военнослужащий '
-        f'inner join Подразделение '
-        f'on Военнослужащий."ID_подчинённого_подразделения" = Подразделение."ID_подразделения" '
-        f'where Военнослужащий."ID_военнослужащего" = {sol_id}')
+    cursor.execute(f'select * from who_am_i where "ID_военнослужащего" = {sol_id}')
     result = cursor.fetchall()
     cursor.close()
 
@@ -80,7 +76,7 @@ def get_personnel(sol_id, commander_id):
 
     # командиром какого подразделения он является sol_id
     # print(f'id подразделения {result[0][2]}')
-    text = f'Вы {result[0][6]}: {result[0][15]}\n'
+    text = f'Вы {result[0][1]}: {result[0][2]}\n'
 
     # В чём тут фишка
     # командир должен иметь возможность обратиться ко всем своим подчинённым
@@ -160,3 +156,13 @@ def later_msg(bot):
             arr.append(i)
     for i in arr:
         config.later.pop(config.later.index(i))
+
+
+def set_register(sol_id, text_type, text):
+
+    print(f'call set_register({sol_id}, \'{text_type}\', \'{text}\')')
+    #
+    # cursor = conn.cursor()
+    # cursor.execute(f'SET search_path TO military; call set_register({sol_id} ::integer, \'{str(text_type)}\' ::text, \'{str(text)}\' ::text)')
+    # conn.commit()
+    # cursor.close()
