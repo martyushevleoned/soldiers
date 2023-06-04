@@ -362,3 +362,18 @@ grant update, select, insert, delete on Подразделение to Админ
 create role сисадмин with login password 'hello_world';
 grant update, select, insert, delete on Военнослужащий to сисадмин;
 
+-- триггер -------------------------------------------------------------------------------------------------------------
+
+--CREATE OR REPLACE FUNCTION insert_trigger_func() RETURNS trigger AS
+--$$ BEGIN
+--INSERT INTO Записи ("ID_личного_дела", "Тип_записи", "Содержание")
+--VALUES(NEW."ID_военнослужащего", 'прибыл для несения службы', NEW."ФИО_военнослужащего");
+--RETURN NEW;
+--END;$$
+--LANGUAGE 'plpgsql';
+
+--create or replace trigger new_soldier
+--after insert on Военнослужащий
+--for each row
+--execute procedure insert_trigger_func()
+
