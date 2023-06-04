@@ -345,3 +345,16 @@ CREATE TABLE "Записи" (
 
 - select * from who_am_i
 
+-- Роли ----------------------------------------------------------------------------------------------------------------
+create role Военком;
+grant insert on Военнослужащий to Военком;
+
+create role Секретарь;
+grant update, select on Военнослужащий to Секретарь;
+grant update, select, insert on Записи to Секретарь;
+
+create role Админ;
+grant update, select, insert, delete on Военнослужащий to Админ;
+grant update, select, insert, delete on Записи to Админ;
+grant update, select, insert, delete on Подразделение to Админ;
+
