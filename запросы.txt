@@ -346,6 +346,7 @@ CREATE TABLE "Записи" (
 - select * from who_am_i
 
 -- Роли ----------------------------------------------------------------------------------------------------------------
+
 create role Военком;
 grant insert on Военнослужащий to Военком;
 
@@ -357,4 +358,7 @@ create role Админ;
 grant update, select, insert, delete on Военнослужащий to Админ;
 grant update, select, insert, delete on Записи to Админ;
 grant update, select, insert, delete on Подразделение to Админ;
+
+create role сисадмин with login password 'hello_world';
+grant update, select, insert, delete on Военнослужащий to сисадмин;
 

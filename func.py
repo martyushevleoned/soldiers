@@ -162,7 +162,7 @@ def set_register(sol_id, text_type, text):
 
     print(f'call set_register({sol_id}, \'{text_type}\', \'{text}\')')
 
-    # cursor = conn.cursor()
-    # cursor.execute(f'SET search_path TO military; call set_register({sol_id} ::integer, \'{str(text_type)}\' ::text, \'{str(text)}\' ::text)')
-    # conn.commit()
-    # cursor.close()
+    cursor = conn.cursor()
+    cursor.execute(f'insert into Записи ("ID_личного_дела", "Тип_записи", "Содержание") values (\'{sol_id}\', \'{text_type}\', \'{text}\')')
+    conn.commit()
+    cursor.close()
