@@ -153,6 +153,7 @@ def later_msg(bot):
     for i in config.later:
         if get_key(i[1]) in config.registred_user:
             bot.send_message(get_key(i[1]), get_surname(i[0]) + ':\n' + i[2], reply_markup=None)
+            # bot.send_message(get_key(i[0]), get_surname(i[1]) + ' получил приказ', reply_markup=None)
             arr.append(i)
     for i in arr:
         config.later.pop(config.later.index(i))
