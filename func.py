@@ -148,6 +148,24 @@ def get_key(val):
             return k
 
 
+# вывод представлений по команде
+def get_table(query):
+    cursor = conn.cursor()
+    cursor.execute(f'select * from {query}')
+    table = cursor.fetchall()
+    cursor.close()
+    text = ''
+    counter = 20
+    for i in table:
+        for j in i:
+            text += str(j) + '\t\t\t'
+        text += '\n'
+        if counter == 1:
+            break
+        counter -= 1
+    return text
+
+
 def later_msg(bot):
     arr = []
     for i in config.later:
@@ -160,10 +178,8 @@ def later_msg(bot):
 
 
 def set_register(sol_id, text_type, text):
-
-    print(f'call set_register({sol_id}, \'{text_type}\', \'{text}\')')
-
     cursor = conn.cursor()
-    cursor.execute(f'insert into Записи ("ID_личного_дела", "Тип_записи", "Содержание") values (\'{sol_id}\', \'{text_type}\', \'{text}\')')
+    cursor.execute(
+        f'insert into Записи ("ID_личного_дела", "Тип_записи", "Содержание") values (\'{sol_id}\', \'{text_type}\', \'{text}\')')
     conn.commit()
     cursor.close()
