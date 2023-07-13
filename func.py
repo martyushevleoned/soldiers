@@ -35,6 +35,21 @@ def get_private(user_id):
            f'Должность:  {result[6]}\n' + \
            f'Специальность:  {result[7]}\n' + \
            f'Выслуга лет:  {result[8]}\n'
+
+    cursor = conn.cursor()
+    cursor.execute(f'select * from get_union({config.registred_user[user_id]})')
+    result = cursor.fetchall()[0]
+    cursor.close()
+    text += 'Подразделение:  ' + str(result[0])
+    return text
+
+
+def get_commanders(user_id):
+    cursor = conn.cursor()
+    cursor.execute(f'select * from get_commander({config.registred_user[user_id]})')
+    result = cursor.fetchall()[0]
+    cursor.close()
+    text = str(result[0]).replace(' <- ', '\n')
     return text
 
 

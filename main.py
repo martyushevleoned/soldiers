@@ -59,6 +59,13 @@ def handler_call(call):
             text=func.get_private(call.message.chat.id),
             reply_markup=config.back_key)
 
+    elif call.data == 'commanders':
+        bot.edit_message_text(
+            chat_id=call.message.chat.id,
+            message_id=call.message.message_id,
+            text=func.get_commanders(call.message.chat.id),
+            reply_markup=config.back_key)
+
     elif call.data == 'personnel':
         text, key = func.get_personnel(config.registred_user[call.message.chat.id],
                                        config.registred_user[call.message.chat.id])
